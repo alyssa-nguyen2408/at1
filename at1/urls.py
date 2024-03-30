@@ -5,6 +5,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include(('users.urls', 'users'), namespace='users')),
     path('eduprod/', include(('eduprod.urls', 'eduprod'), namespace='eduprod')),
-    path('folder1/', include(('folder1.urls', 'folder1'), namespace='folder1')),
+    
     path('accounts/login/', include('users.urls')),
 ]
