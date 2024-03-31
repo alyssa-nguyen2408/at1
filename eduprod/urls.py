@@ -8,10 +8,10 @@ from . import views
 #]
 
 urlpatterns = [
-    #path('', views.home, name='home'),
-    #path('index/', views.index, name='index')
-    path('', views.index, name='index'),#landing page url
-    path('home/', views.home, name='home'),
+    path('', views.home, name='home'),
+    path('index/', views.index, name='index')
+    #path('', views.index, name='index'),#landing page url
+    #path('home/', views.home, name='home'),
 ]
 
 #urlpatterns = [
