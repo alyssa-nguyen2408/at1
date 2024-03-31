@@ -19,8 +19,8 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect(reverse("users:home"))
         else:
-            messages.success(request, "Invalid Credentials.")
-            return render(request, "users/login.html")
+            messages.error(request, "Invalid Credentials.")
+    # If method is not POST or authentication fails, render the login page
     return render(request, "users/login.html")
 
 def logout_view(request):

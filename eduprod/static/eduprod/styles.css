@@ -1,3 +1,37 @@
-body { font-family: Arial, sans-serif; padding: 20px; }
+/*body { font-family: Arial, sans-serif; padding: 20px; }
 .question, .answer { margin: 20px; font-size: 20px; }
 #revealBtn { margin: 20px; font-size: 16px; cursor: pointer; }
+
+.logos-container {*/
+    /*display: flex;
+  }
+  
+  .logo {*/
+    /*margin-right: 20px; *//* Adjust as needed for spacing between the images */
+  /*}
+  
+  .logo img {
+    width: 100px; *//* Adjust the width of the images as needed */
+  /*}*/
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.question, .answer {
+    margin: 20px;
+    font-size: 20px;
+}
+
+#revealBtn {
+    margin: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+
+
