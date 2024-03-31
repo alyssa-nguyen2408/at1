@@ -6,10 +6,14 @@
 <body>
   <div class="logos-container">
     <div class="logo">
-      <img src="{% static 'eduprod/images/folder.png' %}" alt="Logo">
+      <a href="{% url 'eduprod:chemistry' %}">
+        <img src="{% static 'eduprod/images/folder.png' %}" alt="Logo">
+      </a>
     </div>
     <div class="logo">
-      <img src="{% static 'eduprod/images/folder.png' %}" alt="Logo">
+      <a href="{% url 'eduprod:english' %}">
+        <img src="{% static 'eduprod/images/folder.png' %}" alt="Logo">
+      </a>
     </div>
   </div>
 

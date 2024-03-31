@@ -9,7 +9,9 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('index/', views.index, name='index')
+    path('index/', views.index, name='index'),
+    path('chemistry/', views.chemistry, name='chemistry'),  # URL for chemistry page
+    path('english/', views.english, name='english'),  # URL for english page
     #path('', views.index, name='index'),#landing page url
     #path('home/', views.home, name='home'),
 ]

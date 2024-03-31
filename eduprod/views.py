@@ -12,3 +12,9 @@ def index(request):
 
 def home(request):
     return render(request, 'eduprod/home.html')
+
+def chemistry(request):
+    return render(request, 'eduprod/chemistry.html')
+
+def english(request):
+    return render(request, 'eduprod/english.html')
