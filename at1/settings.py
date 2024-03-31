@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+LOGIN_URL = '/accounts/login/'
+
 INSTALLED_APPS = [
     'eduprod',
     'django.contrib.admin',
@@ -69,7 +71,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'at1.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
