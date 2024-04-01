@@ -1,31 +1,40 @@
-document.addEventListener("DOMContentLoaded", function() {
-    let currentQuestionIndex = 0;
-    const questions = JSON.parse(document.getElementById('content').getAttribute('data-questions'));
-    const content = document.getElementById('content');
-    const btn = document.getElementById('revealBtn');
+document.addEventListener('DOMContentLoaded', function() {
+    let currentIndex = 1; // Start index for loading sentences
 
-    function displayQuestion() {
-        if (currentQuestionIndex < questions.length) {
-            const question = questions[currentQuestionIndex].fields.question_text;
-            const answer = questions[currentQuestionIndex].fields.answer_text;
-            content.innerHTML = `<div class='question'>Question: ${question}</div><div class='answer' style='display: none;'>Answer: ${answer}</div>`;
-            btn.textContent = "Reveal Answer";
+    // Function to reveal the answer
+    function revealAnswer(button) {
+        button.nextElementSibling.style.display = 'block';
+        button.style.display = 'none';
+    }
+
+    // Function to load the next sentence
+    function loadNextSentence() {
+        const container = document.getElementById('sentences-container');
+        const nextSentence = document.querySelector(`[data-index="${currentIndex}"]`);
+        
+        if (nextSentence) {
+            container.appendChild(nextSentence.cloneNode(true));
+            currentIndex++;
         } else {
-            content.innerHTML = "No more questions.";
-            btn.style.display = "none";
+            container.innerHTML += '<p>Finished</p>';
+            document.getElementById('next-sentence').style.display = 'none'; // Hide the next question button
         }
     }
 
-    displayQuestion();
-
-    btn.addEventListener("click", function() {
-        const answerElement = content.querySelector('.answer');
-        if (btn.textContent === "Reveal Answer") {
-            answerElement.style.display = "block";
-            btn.textContent = "Next Question";
-        } else {
-            currentQuestionIndex++;
-            displayQuestion();
+    // Event listener for the "Reveal Answer" buttons
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('reveal-answer')) {
+            revealAnswer(event.target);
         }
     });
+
+    // Event listener for the "Next Sentence" button
+    document.getElementById('next-sentence').addEventListener('click', function(event) {
+        event.preventDefault();
+        loadNextSentence();
+    });
+
+    // Load the first sentence initially
+    loadNextSentence();
 });
+

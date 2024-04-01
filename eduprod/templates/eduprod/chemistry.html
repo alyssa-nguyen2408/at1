@@ -1,5 +1,3 @@
-
-
 {% extends "eduprod/layout.html" %}
 {% load static %}
 {% block body %}
@@ -13,8 +11,8 @@
     <h1>Fill in the Gap</h1>
     <div id="sentences-container">
         {% for data in sentence_data %}
-        <div class="sentence">
-            <label>Sentence with Gaps:</label><br>
+        <div class="sentence" data-index="{{ forloop.counter }}">
+            <label>Sentence:</label><br>
             <p class="current-sentence">{{ data.sentence }}</p><br>
             <button class="reveal-answer">Reveal Answer</button>
             <p class="answer" style="display: none;"><strong>Answer:</strong> {{ data.answer }}</p>
