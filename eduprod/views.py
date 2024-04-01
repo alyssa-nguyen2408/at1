@@ -6,10 +6,6 @@ from .models import Question
 from django.contrib.auth.decorators import login_required
 
 @login_required
-def index(request):
-    questions = Question.objects.all()
-    questions_json = serializers.serialize('json', questions)
-    return render(request, 'eduprod/index.html', {'questions_json': questions_json})
 
 
 def home(request):
@@ -26,7 +22,8 @@ def chemistry(request):
         sentence_with_gap = ' '.join(words)
         sentence_data.append({
             'sentence': sentence_with_gap,
-            'answer': gap_word
+            'answer': gap_word,
+            'is_red': sentence.is_red  # Add the color field to the context
         })
     sentence_count = len(sentence_data)  # Pass the length of sentence_data to the template
     context = {
@@ -36,6 +33,16 @@ def chemistry(request):
     return render(request, 'eduprod/chemistry.html', context)
 
 
+def index(request):
+    # Retrieve red-marked sentences
+    red_sentences = Sentence.objects.filter(is_red=True)
+    return render(request, 'eduprod/index.html', {'red_sentences': red_sentences})
+
+def tests(request):
+    return render(request, 'eduprod/tests.html')
+
+def engmod1(request):
+    return render(request, 'eduprod/engmod1.html')
 
 
 

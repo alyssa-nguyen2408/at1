@@ -2,6 +2,18 @@
 {% load static %}
 {% block body %}
 <body>
+    <div class="logos-container">
+      <div class="logo">
+        <a href="{% url 'eduprod:index' %}">
+          <img src="{% static 'eduprod/images/folder.png' %}" alt="Logo">
+        </a>
+      </div>
+      <div class="logo">
+        <a href="{% url 'eduprod:engmod1' %}">
+          <img src="{% static 'eduprod/images/folder.png' %}" alt="Logo">
+        </a>
+      </div>
+    </div>
   
     <h3>Sticky Navigation Bar Example</h3>
     <p>The navbar will <strong>stick</strong> to the top when you reach its scroll position.</p>

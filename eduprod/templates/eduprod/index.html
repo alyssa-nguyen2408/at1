@@ -1,7 +1,18 @@
 {% extends "eduprod/layout.html" %}
-
 {% block body %}
-<div id="content" data-questions='{{ questions_json|safe }}'></div>
-<button id="revealBtn">Reveal Answer</button>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Struggling Sentences Review</title>
+</head>
+<body>
+    <h1>Struggling Sentences Review</h1>
+    <ul>
+        {% for sentence in red_sentences %}
+            <li>{{ sentence.content }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
 {% endblock %}

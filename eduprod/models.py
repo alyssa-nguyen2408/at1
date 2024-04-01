@@ -2,16 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    answer_text = models.TextField()
 
-    def __str__(self):
-        return self.question_text
+class Question(models.Model):
+    text = models.CharField(max_length=255)
+    is_red = models.BooleanField(default=False)  # Indicates whether the question is marked as red
+
 
 
 class Sentence(models.Model):
-    content = models.TextField()
+    content = models.CharField(max_length=255)
+    is_red = models.BooleanField(default=False)  # Add a BooleanField to track if the sentence is marked as red
 
     def __str__(self):
         return self.content

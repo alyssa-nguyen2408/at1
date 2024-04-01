@@ -12,6 +12,8 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('chemistry/', views.chemistry, name='chemistry'),  # URL for chemistry page
     path('english/', views.english, name='english'),  # URL for english page
+    path('tests/', views.tests, name='tests'),  # URL for english page
+    path('engmod1/', views.engmod1, name='engmod1'),  # URL for english page
     #path('', views.index, name='index'),#landing page url
     #path('home/', views.home, name='home'),
 ]
