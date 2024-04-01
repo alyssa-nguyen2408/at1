@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let currentIndex = 1; // Start index for loading sentences
+    let currentIndex = 0; // Start index for loading sentences
+    const sentences = document.querySelectorAll('.sentence');
 
     // Function to reveal the answer
     function revealAnswer(button) {
@@ -7,18 +8,19 @@ document.addEventListener('DOMContentLoaded', function() {
         button.style.display = 'none';
     }
 
-    // Function to load the next sentence
-    function loadNextSentence() {
-        const container = document.getElementById('sentences-container');
-        const nextSentence = document.querySelector(`[data-index="${currentIndex}"]`);
-        
-        if (nextSentence) {
-            container.appendChild(nextSentence.cloneNode(true));
-            currentIndex++;
-        } else {
-            container.innerHTML += '<p>Finished</p>';
-            document.getElementById('next-sentence').style.display = 'none'; // Hide the next question button
+    // Function to load the next batch of sentences
+    function loadNextSentences() {
+        for (let i = currentIndex; i < currentIndex + 1; i++) {
+            if (i < sentences.length) {
+                sentences[i].style.display = 'block';
+            } else {
+                // If all sentences are displayed, show "Finished" message
+                document.getElementById('finished').style.display = 'block';
+                return; // Exit the function
+            }
         }
+        currentIndex += 1;
+        setTimeout(loadNextSentences, 2000); // Load next batch after 2 seconds
     }
 
     // Event listener for the "Reveal Answer" buttons
@@ -28,14 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Event listener for the "Next Sentence" button
-    document.getElementById('next-sentence').addEventListener('click', function(event) {
-        event.preventDefault();
-        loadNextSentence();
-    });
-
-    // Load the first sentence initially
-    loadNextSentence();
+    // Load the first batch of sentences initially
+    loadNextSentences();
 });
 
 

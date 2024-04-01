@@ -28,8 +28,13 @@ def chemistry(request):
             'sentence': sentence_with_gap,
             'answer': gap_word
         })
-    context = {'sentence_data': sentence_data}
+    sentence_count = len(sentence_data)  # Pass the length of sentence_data to the template
+    context = {
+        'sentence_data': sentence_data,
+        'sentence_count': sentence_count
+    }
     return render(request, 'eduprod/chemistry.html', context)
+
 
 
 
