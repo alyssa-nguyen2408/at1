@@ -8,3 +8,10 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question_text
+
+
+class Sentence(models.Model):
+    content = models.TextField()
+
+    def __str__(self):
+        return self.content

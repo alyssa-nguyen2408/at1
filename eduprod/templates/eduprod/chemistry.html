@@ -1,6 +1,29 @@
+
+
 {% extends "eduprod/layout.html" %}
+{% load static %}
 {% block body %}
-<!-- Chemistry-specific content goes here -->
-<h1>Chemistry</h1>
-<p>Welcome to the Chemistry page!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chemistry</title>
+</head>
+<body>
+    <h1>Fill in the Gap</h1>
+    <div id="sentences-container">
+        {% for data in sentence_data %}
+        <div class="sentence">
+            <label>Sentence with Gaps:</label><br>
+            <p class="current-sentence">{{ data.sentence }}</p><br>
+            <button class="reveal-answer">Reveal Answer</button>
+            <p class="answer" style="display: none;"><strong>Answer:</strong> {{ data.answer }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <button id="next-sentence">Next Sentence</button>
+
+    <script src="{% static 'eduprod/chemistry.js' %}"></script>
+</body>
+</html>
 {% endblock %}
