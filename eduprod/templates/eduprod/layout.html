@@ -87,29 +87,40 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        /* Additional CSS for user info alignment */
+        .user-info {
+            float: right;
+            margin-right: 20px; /* Adjust margin as needed */
+            margin-top: 14px; /* Adjust top margin for vertical alignment */
+        }
     </style>
     <script src="{% static 'eduprod/quiz.js' %}" defer></script>
 </head>
 <body>
+    {% block navbar %}
     <ul>
         <li><a class="active" href="{% url 'eduprod:home' %}">Home</a></li>
         <li><a href="{% url 'eduprod:tests' %}">Tests</a></li>
         <li class="Subjects">
             <a href="javascript:void(0)" class="dropbtn">Subjects</a>
             <div class="dropdown-content">
-              <a href="{% url 'eduprod:chemistry' %}">Chemistry</a> <!-- Failed dropdown menu. -->
-              <a href="#{% url 'eduprod:english' %}">English</a>
-        <li><a href="#contact">Contact</a></li>
+                <a href="{% url 'eduprod:chemistry' %}">Chemistry</a>
+                <a href="{% url 'eduprod:english' %}">English</a>
+            </div>
+        </li>
+        <li><a href="#contact">Submission</a></li>
     </ul>
+    {% endblock %}
 
     <div class="header">
         <div class="user-info">
             <span>{{ user.username }}</span>
-            <form action="{% url 'users:logout' %}" method="post" style="margin: 0; margin-left: 20px;">
+            <form action="{% url 'users:logout' %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit">Log out</button>
             </form>
-        </div>   
+        </div>
     </div>
     
     {% if messages %}

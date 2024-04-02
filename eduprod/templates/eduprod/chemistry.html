@@ -23,58 +23,91 @@
             border: none;
             cursor: pointer;
         }
+
+        .check-button {
+            background-color: blue; /* Change color as needed */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1>Fill in the Gap</h1>
     <div id="sentences-container">
         {% for data in sentence_data %}
-        <div class="sentence" data-index="{{ forloop.counter0 }}">
-            <label>Sentence with Gaps:</label><br>
+        <div class="sentence" data-index="{{ forloop.counter0 }}" style="display: none;">
+            <!--<label>Sentence with Gaps:</label><br>-->
             <p class="current-sentence">{{ data.sentence }}</p><br>
             <button class="reveal-answer">Reveal Answer</button>
             <p class="answer" style="display: none;"><strong>Answer:</strong> {{ data.answer }}</p>
             <input type="text" class="answer-input" placeholder="Type your answer here">
-            <button class="green-button" onclick="toggleColor('green', {{ forloop.counter0 }})">Green</button>
-            <button class="red-button" onclick="toggleColor('red', {{ forloop.counter0 }})">Red</button>
-            <button class="confirm-button" onclick="confirmChoice({{ forloop.counter0 }})">Confirm</button>
+            <button class="green-button" onclick="confirmChoice('green', {{ forloop.counter0 }})">Green</button>
+            <button class="red-button" onclick="confirmChoice('red', {{ forloop.counter0 }})">Red</button>
             <p class="confirmation-line" id="confirmation-line-{{ forloop.counter0 }}" style="display: none;"></p>
+            <button class="check-button" onclick="checkAnswer({{ forloop.counter0 }})">Check</button>
         </div>
-        <hr> <!-- Add a horizontal line to separate each sentence -->
+        <hr class="horizontal-line" data-index="{{ forloop.counter0 }}" style="display: none;"> <!-- Horizontal line -->
         {% endfor %}
-        <p id="finished" style="display: none;">Finished</p>
+        <p id="finished" style="display: none;">Finished Revision For Chemistry</p>
     </div>
 
     <script>
-        function toggleColor(color, index) {
-            const sentence = document.querySelector(`.sentence[data-index="${index}"]`);
-            sentence.dataset.color = color;
-            const selectedSentences = document.querySelectorAll(`.sentence[data-color="${color}"]`);
-            selectedSentences.forEach(sentence => {
-                sentence.classList.remove('bold');
-            });
-        }
+        const sentences = document.querySelectorAll('.sentence');
+        const horizontalLines = document.querySelectorAll('.horizontal-line');
+        let currentIndex = 0;
 
-        function confirmChoice(index) {
-            const sentence = document.querySelector(`.sentence[data-index="${index}"]`);
-            const color = sentence.dataset.color;
+        function confirmChoice(choice, index) {
             const confirmationLine = document.getElementById(`confirmation-line-${index}`);
-            confirmationLine.textContent = `Sentence ${index + 1}: ${getColorName(color)}`;
+            if (choice === 'green') {
+                confirmationLine.textContent = `You are clear with this sentence.`;
+            } else if (choice === 'red') {
+                confirmationLine.textContent = `You are unclear with this sentence.`;
+            }
             confirmationLine.style.display = 'block';
-            localStorage.setItem(`sentence${index}`, color);
+            localStorage.setItem(`sentence${index}`, choice);
+            showNextSentence(); // Move to the next sentence after confirming the choice
         }
 
-        function getColorName(color) {
-            return color === 'green' ? 'Great' : 'Needs Help';
+        function showNextSentence() {
+            if (currentIndex < sentences.length) {
+                sentences[currentIndex].style.display = 'block';
+                horizontalLines[currentIndex].style.display = 'block'; // Show the horizontal line
+                currentIndex++;
+            } else {
+                document.getElementById('finished').style.display = 'block';
+            }
+        }
+
+        function checkAnswer(index) {
+            const answerInput = document.querySelector(`.sentence[data-index="${index}"] .answer-input`);
+            const userAnswer = answerInput.value.trim(); // Trim to remove leading and trailing spaces
+            const correctAnswer = sentences[index].querySelector('.answer').textContent.trim();
+            const confirmationLine = document.getElementById(`confirmation-line-${index}`);
+            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                confirmationLine.textContent = 'Correct!';
+            } else {
+                confirmationLine.textContent = 'Try again or check?';
+            }
+            confirmationLine.style.display = 'block';
         }
 
         window.onload = function() {
-            const sentenceCount = {{ sentence_data|length }};
-            for (let i = 0; i < sentenceCount; i++) {
-                const color = localStorage.getItem(`sentence${i}`);
-                if (color) {
-                    toggleColor(color, i);
-                    confirmChoice(i);
+            // Show the first sentence when the page loads
+            showNextSentence();
+
+            // Load the previous choices from local storage
+            for (let i = 0; i < sentences.length; i++) {
+                const choice = localStorage.getItem(`sentence${i}`);
+                if (choice) {
+                    const confirmationLine = document.getElementById(`confirmation-line-${i}`);
+                    if (choice === 'green') {
+                        confirmationLine.textContent = `You are clear with this sentence.`;
+                    } else if (choice === 'red') {
+                        confirmationLine.textContent = `You are unclear with this sentence.`;
+                    }
+                    confirmationLine.style.display = 'block';
                 }
             }
         };

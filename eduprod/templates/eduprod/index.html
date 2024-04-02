@@ -1,18 +1,22 @@
 {% extends "eduprod/layout.html" %}
+
 {% block body %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Struggling Sentences Review</title>
+    <title>Index Page</title>
 </head>
 <body>
-    <h1>Struggling Sentences Review</h1>
-    <ul>
+    <h1>Sentences with Red Color</h1>
+    <div id="red-sentences-container">
         {% for sentence in red_sentences %}
-            <li>{{ sentence.content }}</li>
+            <div>
+                <p>{{ sentence }}</p>
+            </div>
+            <hr>
         {% endfor %}
-    </ul>
+    </div>
 </body>
 </html>
 {% endblock %}

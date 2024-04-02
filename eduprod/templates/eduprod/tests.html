@@ -1,7 +1,23 @@
 {% extends "eduprod/layout.html" %}
 {% load static %}
+
+{% block navbar %}
+<ul>
+    <li><a href="{% url 'eduprod:home' %}">Home</a></li>
+    <li><a class="active" href="{% url 'eduprod:tests' %}">Tests</a></li>
+    <li class="Subjects">
+        <a href="javascript:void(0)" class="dropbtn">Subjects</a>
+        <div class="dropdown-content">
+            <a href="{% url 'eduprod:chemistry' %}">Chemistry</a>
+            <a href="#{% url 'eduprod:english' %}">English</a>
+        </div>
+    </li>
+    <li><a href="#contact">Submission</a></li>
+</ul>
+{% endblock %}
 {% block body %}
 <body>
+
     <div class="logos-container">
       <div class="logo">
         <a href="{% url 'eduprod:index' %}">

@@ -34,8 +34,16 @@ def chemistry(request):
 
 
 def index(request):
-    # Retrieve red-marked sentences
-    red_sentences = Sentence.objects.filter(is_red=True)
+    # Fetch all sentences from the database
+    sentences = Sentence.objects.all()
+
+    # Get sentences with "red" color variable
+    red_sentences = []
+    for i, sentence in enumerate(sentences):
+        choice = request.session.get(f"sentence{i}")
+        if choice == 'red':
+            red_sentences.append(sentence)
+
     return render(request, 'eduprod/index.html', {'red_sentences': red_sentences})
 
 def tests(request):
