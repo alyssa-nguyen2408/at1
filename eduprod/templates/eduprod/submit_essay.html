@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+
+{% extends "eduprod/layout.html" %}
+{% block content %}
+  <h2>Submit Essay</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}

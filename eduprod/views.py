@@ -1,13 +1,31 @@
 from django.core import serializers
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Sentence
 import random
 from .models import Question
 from django.contrib.auth.decorators import login_required
+from .models import Essay
+from .forms import EssayForm
 
 @login_required
+def submit_essay(request):
+    if request.method == 'POST':
+        form = EssayForm(request.POST)
+        if form.is_valid():
+            essay = form.save(commit=False)
+            essay.user = request.user
+            essay.save()
+            return redirect('eduprod:essay_list')
+    else:
+        form = EssayForm()
+    return render(request, 'eduprod/submit_essay.html', {'form': form})
 
+@login_required
+def essay_list(request):
+    essays = Essay.objects.filter(user=request.user)
+    return render(request, 'eduprod/essay_list.html', {'essays': essays})
 
+@login_required
 def home(request):
     return render(request, 'eduprod/home.html')
 

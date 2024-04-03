@@ -6,6 +6,7 @@ from . import views
 #    path('', login_required(views.index), name='index'),
 #    path('index/', login_required(views.index), name='index'),  # Ensure both URLs are protected
 #]
+app_name = 'eduprod'
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -14,6 +15,8 @@ urlpatterns = [
     path('english/', views.english, name='english'),  # URL for english page
     path('tests/', views.tests, name='tests'),  # URL for english page
     path('engmod1/', views.engmod1, name='engmod1'),  # URL for english page
+    path('submit_essay/', views.submit_essay, name='submit_essay'),
+    path('essay_list/', views.essay_list, name='essay_list'),
     #path('', views.index, name='index'),#landing page url
     #path('home/', views.home, name='home'),
 ]

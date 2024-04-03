@@ -35,6 +35,8 @@
 </head>
 <body>
     <h1>Fill in the Gap</h1>
+    <p>This program will use the sentences which had been inputted, and create gaps for the user to fill in. There is a button to mark the answer, a place to put the answer, a reveal answer button and a button you click to see if you are struggling with the concept or not. The next sentences will appear when you press on the button to show whether you are confident or not. </p>
+    <p>This will inform us on your confidence with knowledge, while letting you actively recall information. You can always go back to change your answer, to keep up the very most updated.</p>
     <div id="sentences-container">
         {% for data in sentence_data %}
         <div class="sentence" data-index="{{ forloop.counter0 }}" style="display: none;">
@@ -43,8 +45,8 @@
             <button class="reveal-answer">Reveal Answer</button>
             <p class="answer" style="display: none;"><strong>Answer:</strong> {{ data.answer }}</p>
             <input type="text" class="answer-input" placeholder="Type your answer here">
-            <button class="green-button" onclick="confirmChoice('green', {{ forloop.counter0 }})">Green</button>
-            <button class="red-button" onclick="confirmChoice('red', {{ forloop.counter0 }})">Red</button>
+            <button class="green-button" onclick="confirmChoice('green', {{ forloop.counter0 }})">Confident</button>
+            <button class="red-button" onclick="confirmChoice('red', {{ forloop.counter0 }})">Not Confident</button>
             <p class="confirmation-line" id="confirmation-line-{{ forloop.counter0 }}" style="display: none;"></p>
             <button class="check-button" onclick="checkAnswer({{ forloop.counter0 }})">Check</button>
         </div>

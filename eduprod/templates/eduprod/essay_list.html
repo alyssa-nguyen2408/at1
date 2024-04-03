@@ -1,0 +1,9 @@
+{% extends "eduprod/layout.html" %}
+{% block content %}
+  <h2>My Essays</h2>
+  <ul>
+    {% for essay in essays %}
+      <li><a href="{% url 'eduprod:essay_detail' essay.id %}">{{ essay.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
