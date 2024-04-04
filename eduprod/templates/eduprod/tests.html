@@ -2,17 +2,19 @@
 {% load static %}
 
 {% block navbar %}
+<!-- This will block the content that I put this in under variable navbar, and I will input the code of the navbar, changing the color when clicked on this site. -->
 <ul>
+  <!-- This can be seen as Tests is now listed as active -->
     <li><a href="{% url 'eduprod:home' %}">Home</a></li>
     <li><a class="active" href="{% url 'eduprod:tests' %}">Tests</a></li>
     <li class="Subjects">
         <a href="javascript:void(0)" class="dropbtn">Subjects</a>
         <div class="dropdown-content">
             <a href="{% url 'eduprod:chemistry' %}">Chemistry</a>
-            <a href="#{% url 'eduprod:english' %}">English</a>
+            <a href="{% url 'eduprod:english' %}">English</a>
         </div>
     </li>
-    <li><a href="#contact">Submission</a></li>
+    <li><a href="{% url 'eduprod:submit_essay' %}">Submission</a></li>
 </ul>
 {% endblock %}
 {% block body %}

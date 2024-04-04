@@ -40,7 +40,6 @@
     <div id="sentences-container">
         {% for data in sentence_data %}
         <div class="sentence" data-index="{{ forloop.counter0 }}" style="display: none;">
-            <!--<label>Sentence with Gaps:</label><br>-->
             <p class="current-sentence">{{ data.sentence }}</p><br>
             <button class="reveal-answer">Reveal Answer</button>
             <p class="answer" style="display: none;"><strong>Answer:</strong> {{ data.answer }}</p>
@@ -56,10 +55,12 @@
     </div>
 
     <script>
+        // Javascript w/ the use of chat -> cant transfer into seperate file due to code breaking
         const sentences = document.querySelectorAll('.sentence');
         const horizontalLines = document.querySelectorAll('.horizontal-line');
         let currentIndex = 0;
 
+        //Checks the choice and shows the user what they selected
         function confirmChoice(choice, index) {
             const confirmationLine = document.getElementById(`confirmation-line-${index}`);
             if (choice === 'green') {
@@ -72,6 +73,7 @@
             showNextSentence(); // Move to the next sentence after confirming the choice
         }
 
+        //Shows the next sentence with the green/red button
         function showNextSentence() {
             if (currentIndex < sentences.length) {
                 sentences[currentIndex].style.display = 'block';
@@ -82,6 +84,7 @@
             }
         }
 
+        // Checks the answer with the checkanswer button
         function checkAnswer(index) {
             const answerInput = document.querySelector(`.sentence[data-index="${index}"] .answer-input`);
             const userAnswer = answerInput.value.trim(); // Trim to remove leading and trailing spaces
@@ -95,6 +98,7 @@
             confirmationLine.style.display = 'block';
         }
 
+        //
         window.onload = function() {
             // Show the first sentence when the page loads
             showNextSentence();

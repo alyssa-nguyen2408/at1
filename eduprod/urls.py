@@ -2,10 +2,7 @@ from django.urls import path
 from django.contrib.auth.decorators import login_required
 from . import views
 
-#urlpatterns = [
-#    path('', login_required(views.index), name='index'),
-#    path('index/', login_required(views.index), name='index'),  # Ensure both URLs are protected
-#]
+
 app_name = 'eduprod'
 
 urlpatterns = [
@@ -13,17 +10,8 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('chemistry/', views.chemistry, name='chemistry'),  # URL for chemistry page
     path('english/', views.english, name='english'),  # URL for english page
-    path('tests/', views.tests, name='tests'),  # URL for english page
-    path('engmod1/', views.engmod1, name='engmod1'),  # URL for english page
-    path('submit_essay/', views.submit_essay, name='submit_essay'),
-    path('essay_list/', views.essay_list, name='essay_list'),
-    #path('', views.index, name='index'),#landing page url
-    #path('home/', views.home, name='home'),
+    path('tests/', views.tests, name='tests'),  # URL for tests page
+    path('engmod1/', views.engmod1, name='engmod1'),  # URL for engmod1 page
+    path('submit_essay/', views.submit_essay, name='submit_essay'),#URL for submit essay page
+    path('essay_list/', views.essay_list, name='essay_list'),#URL for essay list page
 ]
-
-#urlpatterns = [
-    # Change the path from '' to 'home/'
-#    path('home/', views.home, name='home'),
-    # Leave the existing index URL pattern as is
-#    path('index/', views.index, name='index'),
-#]

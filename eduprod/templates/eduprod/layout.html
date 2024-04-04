@@ -98,6 +98,7 @@
     <script src="{% static 'eduprod/quiz.js' %}" defer></script>
 </head>
 <body>
+    <!-- Blocks this navbar code from other projects-->
     {% block navbar %}
     <ul>
         <li><a class="active" href="{% url 'eduprod:home' %}">Home</a></li>

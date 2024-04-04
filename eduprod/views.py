@@ -29,6 +29,7 @@ def essay_list(request):
 def home(request):
     return render(request, 'eduprod/home.html')
 
+#This is the code where the program will use a sentence, and randomly select a spot to generate a gap, which is the answer.
 def chemistry(request):
     sentences = Sentence.objects.all()
     sentence_data = []
